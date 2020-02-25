@@ -34,7 +34,7 @@
     <parent>
         <groupId>org.jboss.byteman</groupId>
         <artifactId>byteman-root</artifactId>
-        <version>4.0.8</version>
+        <version>4.0.11</version>
     </parent>
 
     <properties>
@@ -1197,6 +1197,22 @@
                       </configuration>
                     </execution>
                     <execution>
+                      <id>bugfixes.TestTraceOpenAndWrite</id>
+                      <phase>integration-test</phase>
+                      <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                      </goals>
+                      <configuration>
+                          <forkCount>1</forkCount>
+                          <reuseForks>true</reuseForks>
+                         <includes>
+                           <include>org/jboss/byteman/tests/bugfixes/TestTraceOpenAndWrite.class</include>
+                         </includes>
+                         <argLine>-javaagent:${project.build.directory}/byteman-agent-${project.version}.jar=script:${project.build.testOutputDirectory}/scripts/bugfixes/TestTraceOpenAndWrite.btm</argLine>
+                      </configuration>
+                    </execution>
+                    <execution>
                       <id>javaops.TestInnerClasses</id>
                       <phase>integration-test</phase>
                       <goals>
@@ -2231,6 +2247,22 @@
                       </configuration>
                     </execution>
                     <execution>
+                      <id>bugfixes.TestTraceOpenAndWrite.compiled</id>
+                      <phase>integration-test</phase>
+                      <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                      </goals>
+                      <configuration>
+                          <forkCount>1</forkCount>
+                          <reuseForks>true</reuseForks>
+                         <includes>
+                           <include>org/jboss/byteman/tests/bugfixes/TestTraceOpenAndWrite.class</include>
+                         </includes>
+                         <argLine>-Dorg.jboss.byteman.compile.to.bytecode -javaagent:${project.build.directory}/byteman-agent-${project.version}.jar=script:${project.build.testOutputDirectory}/scripts/bugfixes/TestTraceOpenAndWrite.btm</argLine>
+                      </configuration>
+                    </execution>
+                    <execution>
                       <id>javaops.TestInnerClasses.compiled</id>
                       <phase>integration-test</phase>
                       <goals>
@@ -2395,7 +2427,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.objectweb.asm</pattern>
-                                    <shadedPattern>org.pobjectweb.asm</shadedPattern>
+                                    <shadedPattern>org.objectweb.asm</shadedPattern>
                                 </relocation>
                                 <relocation>
                                   <pattern>java_cup.runtime</pattern>
